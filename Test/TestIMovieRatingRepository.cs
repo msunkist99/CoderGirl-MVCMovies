@@ -63,7 +63,7 @@ namespace Test
 
             var result = Math.Round(repository.GetAverageRatingByMovieName(movieName), 3);
 
-            Assert.Equal(expected, result);
+            Assert.Equal(expected.ToString(), result.ToString());
         }
     }
 }
