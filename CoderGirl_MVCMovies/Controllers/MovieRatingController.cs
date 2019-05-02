@@ -33,7 +33,19 @@ namespace CoderGirl_MVCMovies.Controllers
         /// TODO: Done - Each tr with a movie rating should have an id attribute equal to the id of the movie rating
         public IActionResult Index()
         {
-            ViewBag.Movies = movieRatingRepository.movies;
+            List<Movie> indexMovies = new List<Movie>();
+
+            foreach (Movie movie in movieRatingRepository.Movies)
+            {
+                decimal averageRating = movieRatingRepository.GetAverageRatingByMovieName(movie.name);
+                Movie indexMovie = new Movie();
+                indexMovie.id = movie.id;
+                indexMovie.name = movie.name;
+                indexMovie.rating = Convert.ToInt16(averageRating);
+
+                indexMovies.Add(indexMovie);
+            }
+            ViewBag.Movies = indexMovies;
             return View("Index");
         }
 
@@ -63,7 +75,7 @@ namespace CoderGirl_MVCMovies.Controllers
         public IActionResult Details(int id)
         {
             ViewBag.MovieName = movieRatingRepository.GetMovieNameById(id);
-            ViewBag.AverageRating = movieRatingRepository.GetAverageRatingByMovieName(ViewBag.MovieName);
+            ViewBag.MovieRating = movieRatingRepository.GetRatingById(id);
 
             //ViewBag.MovieName = movieName;
             //ViewBag.AverageRating = rating;

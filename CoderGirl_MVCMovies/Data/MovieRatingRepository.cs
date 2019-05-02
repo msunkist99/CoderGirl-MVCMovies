@@ -14,6 +14,19 @@ namespace CoderGirl_MVCMovies.Data
         public static List<Movie> movies = new List<Movie>();
 
 
+        List<Movie> IMovieRatingRepository.Movies
+        {
+            get
+            {
+                if (movies == null)
+                {
+                    return movies = new List<Movie>();
+                }
+                else return movies;
+            }
+        }
+
+
         public static IMovieRatingRepository GetMovieRatingRepository()
         {
             //if (movieRatingRepository == null)
