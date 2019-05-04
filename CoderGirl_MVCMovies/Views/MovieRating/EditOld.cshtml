@@ -1,0 +1,28 @@
+﻿
+@Model CoderGirl_MVCMovies.Models.MovieRating
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Movie Rating</h1>
+
+    <form method='post'>
+        <table>
+            <tr>
+                <th>Movie</th>
+                <th>Rating</th>
+            </tr>
+            <tr>
+                <td asp-for="MovieName" value="@Model.MovieName">@Model.MovieName</td>
+                <td asp-for="Rating" value="@Model.Rating">@Model.Rating</td>
+            </tr>
+        </table>
+        <select name="rating">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <button type='submit'>Update Rating</button>
+    </form>
