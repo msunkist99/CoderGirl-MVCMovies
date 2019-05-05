@@ -16,7 +16,7 @@
         if (movieRating.Rating != null)
         {
             <tr>
-                <td>@movieRating.MovieName</td>
+                <td>@movieRating.Movie</td>
                 <td>@movieRating.Rating</td>
                 <td><a asp-controller="MovieRating" asp-action="Edit" asp-route-id=@movieRating.Id />Edit</td>
                 <td><a asp-controller="MovieRating" asp-action="Delete" asp-route-id=@movieRating.Id />Delete</td>

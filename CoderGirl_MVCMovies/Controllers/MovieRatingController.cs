@@ -35,19 +35,26 @@ namespace CoderGirl_MVCMovies.Controllers
         public IActionResult Create()
         {
             //List<Movie> movies = movieRespository.GetMovies();
-            return View(movieRespository.GetMovies());
+
+            ViewBag.MovieNames = movieRespository.GetMovies().Select(m => m.Name).ToList();
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Create(string movieName, string rating)
+        public IActionResult Create(MovieRating movieRating)
         {
             //return RedirectToAction(actionName: nameof(Details), routeValues: new { movieName, rating });
-            
-            MovieRating movieRating = new MovieRating();
-            movieRating.MovieName = movieName;
+
+
+            /*MovieRating movieRating = new MovieRating();
+            movieRating.Movie = movieName;
             movieRating.Rating = rating;
             movieRatingRepository.Save(movieRating);
 
+            return RedirectToAction(actionName: nameof(Index));
+            */
+
+            movieRatingRepository.Save(movieRating);
             return RedirectToAction(actionName: nameof(Index));
         }
 
@@ -66,10 +73,10 @@ namespace CoderGirl_MVCMovies.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, string newRating, MovieRating movie)
+        //public IActionResult Edit(int id, MovieRating movie)
+        public IActionResult Edit(int id, MovieRating movie)
         { 
-            movie.Id = id;
-            movie.Rating = newRating;
+            //movie.Id = id;
             movieRatingRepository.Update(movie);
 
             return RedirectToAction(actionName: nameof(Index));

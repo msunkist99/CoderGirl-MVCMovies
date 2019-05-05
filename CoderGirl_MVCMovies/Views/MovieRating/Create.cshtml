@@ -1,31 +1,26 @@
-﻿@Model CoderGirl_MVCMovies.Models.Movie
+﻿@model CoderGirl_MVCMovies.Models.MovieRating
 
 @{
-    ViewData["Title"] = "Rate Movie";
+    ViewData["Title"] = "Rate Title";
 }
 
-<h1>Rate a Movie</h1>
+<h1>Rate A Movie</h1>
 
-@if (Model.Count == 0)
-{
-    <p>You have no movies to rate</p>
-}
-else
-{
-    <form method='post'>
-        <select name="movieName">
-            @foreach (var movie in Model)
-            {
-                <option>@movie.Name</option>
-            }
-        </select>
-        <select name="rating">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-        <button type='submit'>Rate Movie</button>
-    </form>
-}
+<form method='post'>
+    <select asp-for="Movie">
+        @foreach (var name in ViewBag.MovieNames)
+        {
+            <option>@name</option>
+        }
+    </select>
+    <select asp-for="Rating">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+    </select>
+    <button type='submit'>Rate Movie</button>
+</form>
+
+

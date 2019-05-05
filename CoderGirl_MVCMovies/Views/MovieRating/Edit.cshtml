@@ -14,24 +14,42 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="MovieName" class="control-label"></label>
-                <input readonly asp-for="MovieName" class="form-control" />
-                <span asp-validation-for="MovieName" class="text-danger"></span>
+                <!-- this line below will capture the Id value in the MovieRating object sent back to Post/Edit-->
+                <!-- but the hidden="hidden" will not display it on the screen-->
+                <input readonly asp-for="Id" class="form-control" hidden="hidden" />
+
+                <!-- display the Movie value as a label-->
+                <label asp-for="Movie" class="control-label">Movie Name</label>
+
+                <!-- this line below will capture the MovieName value in the MovieRating object sent back to Post/Edit-->
+                <!-- but the hidden="hidden" will not display it on the screen-->
+                <input readonly asp-for="Movie" class="form-control" hidden="hidden" />
+                <!-- display the MovieName value as a label -->
+                <label>@Model.Movie</label>
+
+                <span asp-validation-for="Movie" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Rating" class="control-label"></label>
-                <input readonly asp-for="Rating" class="form-control" />
+                <!-- note that we do NOT capture the Rating value using an "input" control-->
+                <!-- we will capture Rating when the user selected from the drop down list below -->
+                <!-- display the Rating value as a label -->
+                <label>@Model.Rating</label>
                 <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
-            <select name="newRating">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+            <div>
+                <label asp-for="Rating" class="control-label">Select New Rating</label>
+                <!-- here we capture the Rating for the MovieRating objec sent back to Post/Edit -->
+                <select name="Rating">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
             <div class="form-group">
-                <input type="submit" value="Update Rating" class="btn btn-primary" />
+                <button type="submit" value="Update Rating" class="btn btn-primary">Update Rating</button>
             </div>
         </form>
     </div>
