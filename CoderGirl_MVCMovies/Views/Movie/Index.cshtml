@@ -20,10 +20,18 @@
         <td>@movie.Name</td>
         <td>@movie.DirectorName</td>
         <td>@movie.Year</td>
-        <td>@movie.AverageRating</td>  where is this coming from???
-        <td>@movie.NumberOfRatings</td>  where is this coming from???  if movie is not rated then display "none"
+        @if (movie.NumberOfRatings == 0)
+        {
+            <td>None</td>
+        }
+        else
+        {
+            <td>@movie.AverageRating</td>
+        }
+        <td>@movie.NumberOfRatings</td>  
         <td><a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit</a></td>
         <td><a asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id">Delete</a></td>
+        <td><a asp-controller="MovieRating" asp-action="Create_UsingModels2" asp-route-id="@movie.Id">Rate</a></td>  --- a new get/create method and create view is needed
     </tr>
     }
 </table>

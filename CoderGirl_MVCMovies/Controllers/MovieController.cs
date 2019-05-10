@@ -14,17 +14,23 @@ namespace CoderGirl_MVCMovies.Controllers
 
         // TODO done - /movie/index view - link "Add a Movie" id="add-new_movie"
         // TODO done - /movie/index view - clicking on "Add a Movie" takes you to /movie/create
-        // TODO - on /movie/index view - table with columns in this order:  Name, Director, Year, Average Rating, Number of Ratings
-        // TODO - on /movie/index view - Edit and Delete links follow the entries in the table
-        // TODO - on /movie/index view - Director is formatted as last name, first name
-        // TODO - on /movie/index view - each row (<tr id="{movie id}") should display the correct information for each movie added.  if movie has not 
+        // TODO done - on /movie/index view - table with columns in this order:  Name, Director, Year, Average Rating, Number of Ratings
+        // TODO done - on /movie/index view - Edit and Delete links follow the entries in the table
+        // TODO done - on /movie/index view - Director is formatted as last name, first name
+        // TODO done - on /movie/index view - each row (<tr id="{movie id}") should display the correct information for each movie added.  if movie has not 
         //        been rated then Average Rating should be "none"
-        // TODO - on /movie/index view - Rate link next to each movie
-        // TODO - on /movie/index view - clicking Rate link takes user to /movierating/create/{movieId} - movieId is for the specific movie
+        // TODO done - on /movie/index view - Rate link next to each movie
+        // TODO done - on /movie/index view - clicking Rate link takes user to /movierating/create_UsingModels2/{movieId} - movieId is for the specific movie
         public IActionResult Index()
         {
             List<Movie> movies = movieRepository.GetMovies();
             return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -33,7 +39,7 @@ namespace CoderGirl_MVCMovies.Controllers
         // TODO - on /movie/create - value returned by select should be the id of the director
         // TODO - on /movie/create - stretch goal - if a movie is added without a name display validation error
         // TODO - on /movie/create - stretch goal - if a validation error occurs none of the information entered should be erased
-        public IActionResult Create()
+        public IActionResult Create_UsingModels2(int movieId)
         {
             return View();
         }

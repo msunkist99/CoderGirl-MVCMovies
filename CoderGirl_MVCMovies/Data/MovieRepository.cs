@@ -32,10 +32,10 @@ namespace CoderGirl_MVCMovies.Data
             */
 
             movie = SetMovieRatings(movie);
+            movie = SetDirector(movie);
 
-            Director director = directorRepository.GetById(movie.DirectorId);
-            movie.DirectorName = director.LastFirstName;
-
+            movie.AverageRating = movieRatingRepository.GetAverageRating(movie.Id);
+            movie.NumberOfRatings = movieRatingRepository.GetRatingCount(movie.Id);
             return movie;
         }
 
@@ -55,6 +55,8 @@ namespace CoderGirl_MVCMovies.Data
 
             movies = movies.Select(movie => SetMovieRatings(movie)).ToList();
             movies = movies.Select(movie => SetDirector(movie)).ToList();
+            movies = movies.Select(movie => SetAverageRating(movie)).ToList();
+            movies = movies.Select(movie => SetRatingCount(movie)).ToList();
 
             return movies;
         }
@@ -86,6 +88,20 @@ namespace CoderGirl_MVCMovies.Data
             Director director = directorRepository.GetById(movie.DirectorId);
 
             movie.DirectorName = director.LastFirstName;
+
+            return movie;
+        }
+
+        private Movie SetAverageRating(Movie movie)
+        {
+            movie.AverageRating = movieRatingRepository.GetAverageRating(movie.Id);
+
+            return movie;
+        }
+
+        private Movie SetRatingCount(Movie movie)
+        {
+            movie.NumberOfRatings = movieRatingRepository.GetRatingCount(movie.Id);
 
             return movie;
         }

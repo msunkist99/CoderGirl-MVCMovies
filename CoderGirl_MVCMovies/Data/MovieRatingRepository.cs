@@ -18,7 +18,13 @@ namespace CoderGirl_MVCMovies.Data
 
         public decimal GetAverageRating(int movieId)
         {
-            throw new NotImplementedException();
+            var average = movieRatings
+                .Where(p => p.MovieId == movieId)
+                .GroupBy(p => p.MovieId)
+                .Select(p => p.Average(q => q.Rating))
+                .SingleOrDefault();
+
+            return Convert.ToDecimal(average);
         }
 
         public MovieRating GetById(int id)
@@ -33,7 +39,11 @@ namespace CoderGirl_MVCMovies.Data
 
         public int GetRatingCount(int movieId)
         {
-            throw new NotImplementedException();
+            var count = movieRatings
+                .Where(p => p.MovieId == movieId)
+                .Count();
+
+            return Convert.ToInt16(count);
         }
 
         public int Save(MovieRating movieRating)
