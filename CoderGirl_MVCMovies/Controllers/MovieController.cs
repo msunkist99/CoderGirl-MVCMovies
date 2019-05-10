@@ -12,6 +12,15 @@ namespace CoderGirl_MVCMovies.Controllers
     {
         public static IMovieRespository movieRepository = RepositoryFactory.GetMovieRepository();
 
+        // TODO done - /movie/index view - link "Add a Movie" id="add-new_movie"
+        // TODO done - /movie/index view - clicking on "Add a Movie" takes you to /movie/create
+        // TODO - on /movie/index view - table with columns in this order:  Name, Director, Year, Average Rating, Number of Ratings
+        // TODO - on /movie/index view - Edit and Delete links follow the entries in the table
+        // TODO - on /movie/index view - Director is formatted as last name, first name
+        // TODO - on /movie/index view - each row (<tr id="{movie id}") should display the correct information for each movie added.  if movie has not 
+        //        been rated then Average Rating should be "none"
+        // TODO - on /movie/index view - Rate link next to each movie
+        // TODO - on /movie/index view - clicking Rate link takes user to /movierating/create/{movieId} - movieId is for the specific movie
         public IActionResult Index()
         {
             List<Movie> movies = movieRepository.GetMovies();
@@ -19,6 +28,11 @@ namespace CoderGirl_MVCMovies.Controllers
         }
 
         [HttpGet]
+        // TODO - on /movie/create - choose a director for the movie from a dropdown - assumption is that a movie can have only one director
+        // TODO - on /movie/create - director name in dropdown should be LastName, FirstName
+        // TODO - on /movie/create - value returned by select should be the id of the director
+        // TODO - on /movie/create - stretch goal - if a movie is added without a name display validation error
+        // TODO - on /movie/create - stretch goal - if a validation error occurs none of the information entered should be erased
         public IActionResult Create()
         {
             return View();

@@ -9,7 +9,10 @@ namespace CoderGirl_MVCMovies.Data
     public class MovieRepository : IMovieRespository
     {
         static List<Movie> movies = new List<Movie>();
-        static int nextId = 1;
+        static int nextId = 0;
+
+        static IMovieRatingRepository movieRatingRepository = RepositoryFactory.GetMovieRatingRepository();
+        static IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();
 
         public void Delete(int id)
         {
@@ -18,19 +21,42 @@ namespace CoderGirl_MVCMovies.Data
 
         public Movie GetById(int id)
         {
-            return movies.SingleOrDefault(m => m.Id == id);
+            //TODO: DONE  insert movieRatings
+            Movie movie = movies.SingleOrDefault(m => m.Id == id);
+            /*
+            List<int> movieRatings = movieRatingRepository.GetMovieRatings()
+                .Where(rating => rating.MovieId == id)
+                .Select(rating => rating.Rating).ToList();
+
+            movie.MovieRatings = movieRatings;
+            */
+
+            movie = SetMovieRatings(movie);
+
+            Director director = directorRepository.GetById(movie.DirectorId);
+            movie.DirectorName = director.LastFirstName;
+
+            return movie;
         }
 
         public List<Movie> GetMovies()
         {
-            return movies;
-        }
+            //TODO:  FOREACH insert movieRatings
+            /*
+            foreach (Movie movie in movies)
+            {
+                List<int> movieRatings = movieRatingRepository.GetMovieRatings()
+                        .Where(rating => rating.MovieId == movie.Id)
+                        .Select(rating => rating.Rating).ToList();
 
-        public int Save(Movie movie)
-        {
-            movie.Id = nextId++;
-            movies.Add(movie);
-            return movie.Id;
+                movie.MovieRatings = movieRatings;
+            }
+            */
+
+            movies = movies.Select(movie => SetMovieRatings(movie)).ToList();
+            movies = movies.Select(movie => SetDirector(movie)).ToList();
+
+            return movies;
         }
 
         public void Update(Movie movie)
@@ -43,5 +69,33 @@ namespace CoderGirl_MVCMovies.Data
             this.Delete(movie.Id);
             movies.Add(movie);
         }
+
+        private Movie SetMovieRatings(Movie movie)
+        {
+            List<int> movieRatings = movieRatingRepository.GetMovieRatings()
+                .Where(rating => rating.MovieId == movie.Id)
+                .Select(rating => rating.Rating).ToList();
+
+            movie.MovieRatings = movieRatings;
+
+            return movie;
+        }
+
+        private Movie SetDirector(Movie movie)
+        {
+            Director director = directorRepository.GetById(movie.DirectorId);
+
+            movie.DirectorName = director.LastFirstName;
+
+            return movie;
+        }
+
+        public int Save(Movie movie)
+        {
+            movie.Id = nextId++;
+            movies.Add(movie);
+            return movie.Id;
+        }
+
     }
 }

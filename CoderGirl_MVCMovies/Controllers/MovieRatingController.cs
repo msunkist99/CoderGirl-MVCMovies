@@ -19,6 +19,11 @@ namespace CoderGirl_MVCMovies.Controllers
             return View(movieRatings);
         }
 
+        // TODO - /movierating/create/{movieId} - view should be populated with readonly input for the movie name
+        // TODO - /movierating/create/{movieId} - user should be able to select a rating from a dropdown list
+        // TODO - /movierating/create/{movieId} - clicking on submit button redirect to movie/index view
+        // TODO - try creating another get/create method that takes the movieId input parameter
+        // TODO - try creating another movierating/create view for these changes
         [HttpGet]
         public IActionResult Create()
         {

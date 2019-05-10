@@ -9,11 +9,16 @@ namespace CoderGirl_MVCMovies.Data
     public class MovieRatingRepository : IMovieRatingRepository
     {
         private static List<MovieRating> movieRatings = new List<MovieRating>();
-        private static int nextId = 1;
+        private static int nextId = 0;
 
         public void Delete(int id)
         {
             movieRatings.RemoveAll(r => r.Id == id);
+        }
+
+        public decimal GetAverageRating(int movieId)
+        {
+            throw new NotImplementedException();
         }
 
         public MovieRating GetById(int id)
@@ -24,6 +29,11 @@ namespace CoderGirl_MVCMovies.Data
         public List<MovieRating> GetMovieRatings()
         {
             return movieRatings;
+        }
+
+        public int GetRatingCount(int movieId)
+        {
+            throw new NotImplementedException();
         }
 
         public int Save(MovieRating movieRating)

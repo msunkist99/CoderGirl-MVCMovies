@@ -11,13 +11,17 @@
         <th>Movie Name</th>
         <th>Director</th>
         <th>Year</th>
+        <th>Average Rating</th>
+        <th>Number of Ratings</th>
     </tr>
     @foreach (var movie in Model)
     {
-    <tr>
+    <tr id=@movie.Id>
         <td>@movie.Name</td>
-        <td>@movie.Director</td>
+        <td>@movie.DirectorName</td>
         <td>@movie.Year</td>
+        <td>@movie.AverageRating</td>  where is this coming from???
+        <td>@movie.NumberOfRatings</td>  where is this coming from???  if movie is not rated then display "none"
         <td><a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit</a></td>
         <td><a asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id">Delete</a></td>
     </tr>
