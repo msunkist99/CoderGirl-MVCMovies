@@ -9,7 +9,7 @@ namespace CoderGirl_MVCMovies.Data
     public class DirectorRepository : IDirectorRepository
     {
         static List<Director> directors = new List<Director>();
-        static int nextId = 0;
+        static int nextId = 1;
 
         static IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();
 
@@ -25,14 +25,23 @@ namespace CoderGirl_MVCMovies.Data
         {
             Director director = directors.SingleOrDefault(p => p.Id == id);
 
-            director = SetMovies(director);
+            //director = SetMovies(director);
 
             return director;
         }
 
         public List<Director> GetDirectors()
         {
-            return directors.Select(director => SetMovies(director)).ToList();
+            //Director director = new Director { FirstName = "Laura", LastName = "Rundquist", BirthDate = Convert.ToDateTime( "10/23/2000"), Nationality = "US" };
+            //directors.Add(director);
+            //director = new Director { FirstName = "Barb", LastName = "Ruthier", BirthDate = Convert.ToDateTime("04/22/1964"), Nationality = "Crazy Town" };
+            //directors.Add(director);
+            //director = new Director { FirstName = "Sue", LastName = "Wease", BirthDate = Convert.ToDateTime("06/10/1966"), Nationality = "Mexico" };
+            //directors.Add(director);
+
+            //return directors.Select(d => SetMovies(d)).ToList();
+
+            return directors;
         }
 
         public int Save(Director director)
@@ -48,16 +57,18 @@ namespace CoderGirl_MVCMovies.Data
             directors.Add(director);
         }
 
-        private Director SetMovies(Director director)
+        /*
+         * private Director SetMovies(Director director)
         {
             List<Movie> movies = movieRepository.GetMovies()
-                .Where(id => id.DirectorId == director.Id)
+                .Where(movieId => movieId.DirectorId == director.Id)
                 .ToList();
 
             director.Movies = movies;
 
             return director;
         }
+        */
 
 
     }

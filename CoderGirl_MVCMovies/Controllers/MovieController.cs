@@ -11,6 +11,8 @@ namespace CoderGirl_MVCMovies.Controllers
     public class MovieController : Controller
     {
         public static IMovieRespository movieRepository = RepositoryFactory.GetMovieRepository();
+        public static IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();
+
 
         // TODO done - /movie/index view - link "Add a Movie" id="add-new_movie"
         // TODO done - /movie/index view - clicking on "Add a Movie" takes you to /movie/create
@@ -30,20 +32,15 @@ namespace CoderGirl_MVCMovies.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Directors = directorRepository.GetDirectors();
             return View();
         }
 
-        [HttpGet]
-        // TODO - on /movie/create - choose a director for the movie from a dropdown - assumption is that a movie can have only one director
-        // TODO - on /movie/create - director name in dropdown should be LastName, FirstName
-        // TODO - on /movie/create - value returned by select should be the id of the director
+        // TODO - done - on /movie/create - choose a director for the movie from a dropdown - assumption is that a movie can have only one director
+        // TODO - done - on /movie/create - director name in dropdown should be LastName, FirstName
+        // TODO - done - on /movie/create - value returned by select should be the id of the director
         // TODO - on /movie/create - stretch goal - if a movie is added without a name display validation error
         // TODO - on /movie/create - stretch goal - if a validation error occurs none of the information entered should be erased
-        public IActionResult Create_UsingModels2(int movieId)
-        {
-            return View();
-        }
-
         [HttpPost]
         public IActionResult Create(Movie movie)
         {

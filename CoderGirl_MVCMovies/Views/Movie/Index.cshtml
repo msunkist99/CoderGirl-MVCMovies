@@ -5,7 +5,7 @@
 }
 
 <h1>Movies</h1>
-<a asp-controller="Movie" asp-action="Create">Add New Movie</a>
+<a id="add-new-movie" asp-controller="Movie" asp-action="Create">Add a Movie</a>
 <table>
     <tr>
         <th>Movie Name</th>
@@ -31,7 +31,7 @@
         <td>@movie.NumberOfRatings</td>  
         <td><a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit</a></td>
         <td><a asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id">Delete</a></td>
-        <td><a asp-controller="MovieRating" asp-action="Create_UsingModels2" asp-route-id="@movie.Id">Rate</a></td>  --- a new get/create method and create view is needed
+        <td><a asp-controller="MovieRating" asp-action="Create_UsingModels2" asp-route-id="@movie.Id">Rate</a></td>  
     </tr>
     }
 </table>

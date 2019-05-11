@@ -9,7 +9,7 @@ namespace CoderGirl_MVCMovies.Data
     public class MovieRepository : IMovieRespository
     {
         static List<Movie> movies = new List<Movie>();
-        static int nextId = 0;
+        static int nextId = 1;
 
         static IMovieRatingRepository movieRatingRepository = RepositoryFactory.GetMovieRatingRepository();
         static IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();

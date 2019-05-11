@@ -7,44 +7,23 @@ namespace CoderGirl_MVCMovies.Models
 {
     public class Director
     {
-        private string lastFirstName;
+        //private string lastFirstName;
 
         public int Id { get; set; }
-
-        public string FirstName {
-            get
-            {
-                return FirstName;
-            }
-            set
-            {
-                this.FirstName = value;
-                lastFirstName = LastName + ", " + FirstName;
-            }
-        }
-
-        public string LastName
-        {
-            get
-            {
-                return LastName;
-            }
-            set
-            {
-                this.LastName = value;
-                lastFirstName = LastName + ", " + FirstName;
-            }
-        }
+        public string FirstName { get; set; }
+ 
+        public string LastName { get; set; }
 
         public string LastFirstName {
             get
             {
-                return lastFirstName;
+                //return lastFirstName;
+                return LastName + ", " + FirstName;
             }
         }
 
         public DateTime BirthDate { get; set; }
         public string Nationality { get; set; }
-        public List<Movie> Movies { get; set; }
+        //public List<Movie> Movies { get; set; }
     }
 }

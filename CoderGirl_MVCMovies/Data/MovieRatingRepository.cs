@@ -9,7 +9,7 @@ namespace CoderGirl_MVCMovies.Data
     public class MovieRatingRepository : IMovieRatingRepository
     {
         private static List<MovieRating> movieRatings = new List<MovieRating>();
-        private static int nextId = 0;
+        private static int nextId = 1;
 
         public void Delete(int id)
         {
