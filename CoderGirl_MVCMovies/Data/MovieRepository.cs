@@ -87,7 +87,14 @@ namespace CoderGirl_MVCMovies.Data
         {
             Director director = directorRepository.GetById(movie.DirectorId);
 
-            movie.DirectorName = director.LastFirstName;
+            if (director == null)
+            {
+                movie.DirectorName = "Director name not available";
+            }
+            else
+            {
+                movie.DirectorName = director.LastFirstName;
+            }
 
             return movie;
         }

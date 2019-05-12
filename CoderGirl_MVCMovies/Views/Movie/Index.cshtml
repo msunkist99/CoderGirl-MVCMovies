@@ -31,7 +31,7 @@
         <td>@movie.NumberOfRatings</td>  
         <td><a asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit</a></td>
         <td><a asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id">Delete</a></td>
-        <td><a asp-controller="MovieRating" asp-action="Create_UsingModels2" asp-route-id="@movie.Id">Rate</a></td>  
+        <td><a asp-controller="MovieRating" asp-action="CreateUsingModels2" asp-route-movieId=@movie.Id>Rate</a></td>  
     </tr>
     }
 </table>
