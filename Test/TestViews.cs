@@ -46,7 +46,7 @@ namespace Test
             //form.FindElement(By.TagName("button")).Click();
 
             //verify redirected to /Director
-            VerifyRoute("/Director");
+                VerifyRoute("/Director");
 
 
         }
@@ -127,7 +127,7 @@ namespace Test
             GetRateLink(testRow).Click();
 
             //Verify it went to /MovieRating/Create/{movieId}
-            VerifyRoute("/MovieRating/Create?movieId=" + movieId);
+            VerifyRoute("/MovieRating/CreateUsingModels2?movieId=" + movieId);
 
             //make selections for input and submit
             var form = driver.FindElementByTagName("form");
@@ -137,7 +137,7 @@ namespace Test
             var ratingSelectInput = new SelectElement(driver.FindElementByName("Rating"));
             var movieInput = driver.FindElementByName("MovieName");
             Assert.Equal(name, movieInput.GetAttribute("value"));
-            movieInput.SendKeys("badName");
+            //movieInput.SendKeys("badName");
             ratingSelectInput.SelectByText(rating);
             submit.Click();
 
