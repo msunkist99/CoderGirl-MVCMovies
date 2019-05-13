@@ -41,10 +41,14 @@ namespace Test
             driver.FindElementByName("BirthDate").SendKeys(birth);
             driver.FindElementByName("Nationality").SendKeys(nation);
             var form = driver.FindElementByTagName("form");
-            form.FindElement(By.TagName("button")).Click();
+            var formSubmit = form.FindElement(By.TagName("button"));
+            formSubmit.Click();
+            //form.FindElement(By.TagName("button")).Click();
 
             //verify redirected to /Director
             VerifyRoute("/Director");
+
+
         }
 
         [Theory, TestPriority(0)]
