@@ -37,7 +37,7 @@ namespace CoderGirl_MVCMovies.Controllers
         public IActionResult Create(Director director)
         {
             directorRepository.Save(director);
-            return RedirectToAction(actionName: nameof(Index));
+            return RedirectToAction(controllerName: nameof(Director), actionName: nameof(Index));
         }
     }
 }
