@@ -13,8 +13,7 @@ namespace CoderGirl_MVCMovies.Data
 
         static IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();
 
-        static IMovieRespository movieRepository = RepositoryFactory.GetMovieRepository();
-
+        //static IMovieRespository movieRepository = RepositoryFactory.GetMovieRepository();
 
         public void Delete(int id)
         {
@@ -24,22 +23,20 @@ namespace CoderGirl_MVCMovies.Data
         public Director GetById(int id)
         {
             Director director = directors.SingleOrDefault(p => p.Id == id);
-
-            //director = SetMovies(director);
-
             return director;
         }
 
         public List<Director> GetDirectors()
         {
-            //Director director = new Director { FirstName = "Laura", LastName = "Rundquist", BirthDate = Convert.ToDateTime( "10/23/2000"), Nationality = "US" };
-            //directors.Add(director);
-            //director = new Director { FirstName = "Barb", LastName = "Ruthier", BirthDate = Convert.ToDateTime("04/22/1964"), Nationality = "Crazy Town" };
-            //directors.Add(director);
-            //director = new Director { FirstName = "Sue", LastName = "Wease", BirthDate = Convert.ToDateTime("06/10/1966"), Nationality = "Mexico" };
-            //directors.Add(director);
-
-            //return directors.Select(d => SetMovies(d)).ToList();
+            /*  this will "seed" your list of directors
+            Director director = new Director { FirstName = "Laura", LastName = "Rundquist", BirthDate = Convert.ToDateTime( "10/23/2000"), Nationality = "US" };
+            Save(director);
+            director = new Director { FirstName = "Barb", LastName = "Ruthier", BirthDate = Convert.ToDateTime("04/22/1964"), Nationality = "Crazy Town" };
+            Save(director);
+            director = new Director { FirstName = "Sue", LastName = "Wease", BirthDate = Convert.ToDateTime("06/10/1966"), Nationality = "Mexico" };
+            Save(director);
+            return directors.Select(d => SetMovies(d)).ToList();
+            */
 
             return directors;
         }
@@ -56,20 +53,5 @@ namespace CoderGirl_MVCMovies.Data
             this.Delete(director.Id);
             directors.Add(director);
         }
-
-        /*
-         * private Director SetMovies(Director director)
-        {
-            List<Movie> movies = movieRepository.GetMovies()
-                .Where(movieId => movieId.DirectorId == director.Id)
-                .ToList();
-
-            director.Movies = movies;
-
-            return director;
-        }
-        */
-
-
     }
 }

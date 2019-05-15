@@ -7,8 +7,6 @@ namespace CoderGirl_MVCMovies.Models
 {
     public class Director
     {
-        //private string lastFirstName;
-
         public int Id { get; set; }
         public string FirstName { get; set; }
  
@@ -17,13 +15,11 @@ namespace CoderGirl_MVCMovies.Models
         public string LastFirstName {
             get
             {
-                //return lastFirstName;
                 return LastName + ", " + FirstName;
             }
         }
 
         public DateTime BirthDate { get; set; }
         public string Nationality { get; set; }
-        //public List<Movie> Movies { get; set; }
     }
 }

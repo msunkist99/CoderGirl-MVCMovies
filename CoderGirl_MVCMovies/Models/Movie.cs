@@ -14,7 +14,6 @@ namespace CoderGirl_MVCMovies.Models
         public List<int> MovieRatings { get; set; }
         public int DirectorId { get; set; }
         public string DirectorName { get; set; }
-        //public Director DirectorObject { get; set; }
 
         // below would help if a movie could have one to many directors
         //public List<string> DirectorIds { get; set; }

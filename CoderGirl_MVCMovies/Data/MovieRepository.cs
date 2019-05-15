@@ -23,6 +23,7 @@ namespace CoderGirl_MVCMovies.Data
         {
             //TODO: DONE  insert movieRatings
             Movie movie = movies.SingleOrDefault(m => m.Id == id);
+
             /*
             List<int> movieRatings = movieRatingRepository.GetMovieRatings()
                 .Where(rating => rating.MovieId == id)
@@ -41,7 +42,6 @@ namespace CoderGirl_MVCMovies.Data
 
         public List<Movie> GetMovies()
         {
-            //TODO:  FOREACH insert movieRatings
             /*
             foreach (Movie movie in movies)
             {
@@ -119,6 +119,5 @@ namespace CoderGirl_MVCMovies.Data
             movies.Add(movie);
             return movie.Id;
         }
-
     }
 }
