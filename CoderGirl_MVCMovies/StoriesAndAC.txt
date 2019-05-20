@@ -71,16 +71,16 @@ Stretch Goal: Validate Movie name
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 5/14/19
-
+https://www.codeproject.com/Articles/710702/ASP-NET-MVC-Server-Side-Validation
 I want to validate the Movie model from /Movie/Create
-- Given I am on the /Movie/Create page, if I click submit without entering a name I should get a validation message "Name must be included"
-- Given I am on the /Movie/Create page, if I click submit and the year I enter is before 1888 or after the current year I should get a validation message "Not a valid year"
+- done - Given I am on the /Movie/Create page, if I click submit without entering a name I should get a validation message "Name must be included"
+- done - Given I am on the /Movie/Create page, if I click submit and the year I enter is before 1888 or after the current year I should get a validation message "Not a valid year"
 
 I want to validate the Director model from /Director/Create
-- Given I am on the /Director/Create page, the input for BirthDate should have type="date"
-- Given I am on the /Director/Create page, if I click submit without entering a name I should get a validation message "Name must be included"
-- Given I am on the /Director/Create page, the default value for Nationality should be "unknown"
-- Given I am on the /Director/Create page, if I click submit and the Nationality has no value, make the value to be "unknown"
+- done - Given I am on the /Director/Create page, the input for BirthDate should have type="date"
+- done - Given I am on the /Director/Create page, if I click submit without entering a name I should get a validation message "Name must be included"
+- done - Given I am on the /Director/Create page, the default value for Nationality should be "unknown"
+- done - Given I am on the /Director/Create page, if I click submit and the Nationality has no value, make the value to be "unknown"
 
 This week, do a class diagram to set up implementation of next weeks refactor. Bring to class next week.
 - Class diagram for BaseRepository which contains methods common to MovieRepository, DirectorRepository and MovieRatingRepository
