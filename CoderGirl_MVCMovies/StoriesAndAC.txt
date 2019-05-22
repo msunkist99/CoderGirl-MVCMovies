@@ -94,8 +94,8 @@ This week, do a class diagram to set up implementation of next weeks refactor. B
 Instruction for Inheritance:
 By this point you should have 3 different repository classes. Their signature should be very similiar if not nearly identical. Most methods are doing nearly identical work.
 This means that these are good candidates for inheritance. 
-- Create an interface called IModel. It should contain a property of type int called Id. 
-- Have all your models implement the IModel interface
+- Done - Create an interface called IModel. It should contain a property of type int called Id. 
+- Done - Have all your models implement the IModel interface
 - Create a ModelRepository class. (Recommend first creating an IModelRepository interface to have this implement.)
 - The ModelRepository class should have methods for 
 	- saving a new IModel (assign it unique id and add to list)
