@@ -137,7 +137,7 @@ namespace Test
             var ratingSelectInput = new SelectElement(driver.FindElementByName("Rating"));
             var movieInput = driver.FindElementByName("MovieName");
             Assert.Equal(name, movieInput.GetAttribute("value"));
-            //movieInput.SendKeys("badName");
+            movieInput.SendKeys("badName");
             ratingSelectInput.SelectByText(rating);
             submit.Click();
 
