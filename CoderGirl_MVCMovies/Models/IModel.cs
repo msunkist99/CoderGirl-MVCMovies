@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace CoderGirl_MVCMovies.Models
 {
-    interface IModel
+    public interface IModel
     {
+        // public by default
         int Id { get; set; }
     }
 }

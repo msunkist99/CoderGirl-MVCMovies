@@ -10,19 +10,25 @@ namespace CoderGirl_MVCMovies.Controllers
 {
     public class MovieController : Controller
     {
-        static IMovieRespository movieRepository = RepositoryFactory.GetMovieRepository();
-        static IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();
+        static IModelRepository movieRepository = RepositoryFactory.GetMovieRepository();
+        static IModelRepository directorRepository = RepositoryFactory.GetDirectorRepository();
 
         public IActionResult Index()
         {
-            List<Movie> movies = movieRepository.GetMovies();
+            List<Movie> movies = movieRepository.GetModels()
+                                                .Cast<Movie>()
+                                                .ToList();
+
             return View(movies);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Directors = directorRepository.GetDirectors();
+            ViewBag.Directors = directorRepository.GetModels()
+                                                  .Cast<Director>()
+                                                  .ToList();
+
             return View();
         }
 
@@ -35,12 +41,14 @@ namespace CoderGirl_MVCMovies.Controllers
             }
             if(movie.Year < 1888 || movie.Year > DateTime.Now.Year)
             {
-                ModelState.AddModelError("Year", "Year is not valid");
+                ModelState.AddModelError("Year", "Not a valid year");
             }
 
             if(ModelState.ErrorCount > 0)
             {
-                ViewBag.Directors = directorRepository.GetDirectors();
+                ViewBag.Directors = directorRepository.GetModels()
+                                                      .Cast<Director>()
+                                                      .ToList();
                 return View(movie);
             }
 
@@ -51,7 +59,10 @@ namespace CoderGirl_MVCMovies.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Movie movie = movieRepository.GetById(id);
+            IModel model = movieRepository.GetById(id);
+
+            // cast the model which is an IModel to Movie
+            Movie movie = (Movie)model;
             return View(movie);
         }
 

@@ -10,12 +10,15 @@ namespace CoderGirl_MVCMovies.Controllers
 {
     public class DirectorController : Controller
     {
-        private IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();
+        private IModelRepository directorRepository = RepositoryFactory.GetDirectorRepository();
 
         [HttpGet]
         public IActionResult Index()
         {
-            List<Director> directors = directorRepository.GetDirectors();
+            List<Director> directors = directorRepository.GetModels()
+                                                         .Cast<Director>()
+                                                         .ToList();
+
             return View(directors);
         }
 
@@ -30,17 +33,17 @@ namespace CoderGirl_MVCMovies.Controllers
         {
             if (String.IsNullOrWhiteSpace(director.FirstName))
             {
-                ModelState.AddModelError("FirstName", "Name must be included");
+                ModelState.AddModelError("FirstName", "First Name must be included");
             }
 
             if (String.IsNullOrWhiteSpace(director.LastName))
             {
-                ModelState.AddModelError("LastName", "Name must be included");
+                ModelState.AddModelError("LastName", "Last Name must be included");
             }
 
             if (string.IsNullOrWhiteSpace(director.Nationality))
             {
-                director.Nationality = "Unknown";
+                director.Nationality = "unknown";
             }
 
             if (ModelState.ErrorCount > 0)

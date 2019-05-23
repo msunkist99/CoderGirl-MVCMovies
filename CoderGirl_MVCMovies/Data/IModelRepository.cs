@@ -6,7 +6,7 @@ using CoderGirl_MVCMovies.Models;
 
 namespace CoderGirl_MVCMovies.Data
 {
-    interface IModelRepository
+    public interface IModelRepository
     {
         void Delete(int id);
 
@@ -17,6 +17,5 @@ namespace CoderGirl_MVCMovies.Data
         int Save(IModel model);
 
         void Update(IModel model);
-
     }
 }

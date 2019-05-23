@@ -6,59 +6,56 @@ using CoderGirl_MVCMovies.Models;
 
 namespace CoderGirl_MVCMovies.Data
 {
-    public class MovieRepository : IMovieRespository
+    public class MovieRepository : BaseRepository  // BaseRepository is an IModelRepository
     {
-        static List<Movie> movies = new List<Movie>();
-        static int nextId = 1;
-        static IMovieRatingRepository ratingRepository = RepositoryFactory.GetMovieRatingRepository();
-        static IDirectorRepository directorRepository = RepositoryFactory.GetDirectorRepository();
+        static IModelRepository ratingRepository = RepositoryFactory.GetMovieRatingRepository();
+        static IModelRepository directorRepository = RepositoryFactory.GetDirectorRepository();
+        // models comes from the BaseRepository which has access method of protected
 
-        public void Delete(int id)
-        {
-            movies.RemoveAll(m => m.Id == id);
-        }
 
-        public Movie GetById(int id)
+        //  override BaseRepository
+        public override IModel GetById(int id)
         {
-            Movie movie = movies.SingleOrDefault(m => m.Id == id);
+            // cast returning model to Movie type
+            Movie movie = (Movie) base.GetById(id);
             movie = SetMovieRatings(movie);
             movie = SetDirectorName(movie);
+
+            // Movie is an IModel
             return movie;
+            // code calling this method must cast as Movie because this method returns IModel type, not Movie type
         }
 
-        public List<Movie> GetMovies()
+        // override BaseRepository
+        public override List<IModel> GetModels()
         {
-            return movies.Select(movie => SetMovieRatings(movie))
-                .Select(movie => SetDirectorName(movie)).ToList();
+            List<Movie> movies = base.GetModels().Cast<Movie>().ToList();
+
+            movies.Select(movie => SetMovieRatings(movie))
+                         .Select(movie => SetDirectorName(movie))
+                         .ToList();
+
+            return movies.Cast<IModel>().ToList();
         }
 
-        public int Save(Movie movie)
-        {
-            movie.Id = nextId++;
-            movies.Add(movie);
-            return movie.Id;
-        }
-
-        public void Update(Movie movie)
-        {
-            this.Delete(movie.Id);
-            movies.Add(movie);
-        }
-
+        // this is only in the child not in BaseRepository
         private Movie SetMovieRatings(Movie movie)
         {
-            List<int> ratings = ratingRepository.GetMovieRatings()
-                                                .Where(rating => rating.MovieId == movie.Id)
-                                                .Select(rating => rating.Rating)
-                                                .ToList();
-            movie.Ratings = ratings;
+             movie.Ratings  = ratingRepository.GetModels()
+                                              .Cast<MovieRating>()
+                                              .Where(rating => rating.MovieId == movie.Id)
+                                              .Select(rating => rating.Rating)
+                                              .ToList();
+
             return movie;
         }
 
+        // this is only in the child not in BaseRepository
         private Movie SetDirectorName(Movie movie)
         {
-            Director director = directorRepository.GetById(movie.DirectorId);
+            Director director = (Director) directorRepository.GetById(movie.DirectorId);
             movie.DirectorName = director.FullName;
+
             return movie;
         }
     }
