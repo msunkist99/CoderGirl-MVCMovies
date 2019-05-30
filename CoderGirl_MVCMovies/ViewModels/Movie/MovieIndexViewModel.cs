@@ -24,8 +24,8 @@ namespace CoderGirl_MVCMovies.ViewModels.Movie
                 movieViewModel.Name = movie.Name;
                 movieViewModel.Year = movie.Year;
                 movieViewModel.DirectorName = movie.DirectorName;
-                movieViewModel.RatingsAverage = 0;
-                movieViewModel.RatingsCount = movie.Ratings.Count();
+                movieViewModel.RatingsAverage = movie.RatingAverage;
+                movieViewModel.RatingsCount = movie.RatingCount;
 
                 movieIndexViewModels.Add(movieViewModel);
             }

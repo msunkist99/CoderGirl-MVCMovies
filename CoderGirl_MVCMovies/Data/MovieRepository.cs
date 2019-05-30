@@ -8,7 +8,7 @@ namespace CoderGirl_MVCMovies.Data
 {
     public class MovieRepository : BaseRepository  // BaseRepository is an IModelRepository
     {
-        static IModelRepository ratingRepository = RepositoryFactory.GetMovieRatingRepository();
+        static IModelRepository movieRatingRepository = RepositoryFactory.GetMovieRatingRepository();
         static IModelRepository directorRepository = RepositoryFactory.GetDirectorRepository();
         // models comes from the BaseRepository which has access method of protected
 
@@ -20,6 +20,8 @@ namespace CoderGirl_MVCMovies.Data
             Movie movie = (Movie) base.GetById(id);
             movie = SetMovieRatings(movie);
             movie = SetDirectorName(movie);
+            movie = SetRatingAverage(movie);
+            movie = SetRatingCount(movie);
 
             // Movie is an IModel
             return movie;
@@ -41,7 +43,7 @@ namespace CoderGirl_MVCMovies.Data
         // this is only in the child not in BaseRepository
         private Movie SetMovieRatings(Movie movie)
         {
-             movie.Ratings  = ratingRepository.GetModels()
+             movie.Ratings  = movieRatingRepository.GetModels()
                                               .Cast<MovieRating>()
                                               .Where(rating => rating.MovieId == movie.Id)
                                               .Select(rating => rating.Rating)
@@ -59,16 +61,40 @@ namespace CoderGirl_MVCMovies.Data
             return movie;
         }
 
-        private Movie SetAverageRating(Movie movie)
+        //  SetRatingAverage and SetRatingCount are here in the MovieRepository
+        //  instead of in the MovieRatingRepository
+        //  because you cannot add these methods to MovieRatingRepository
+        //  and then create a movieRatingRepository that is a type - IModelRepository
+        //  because these methods are not in IModelRepository
+        //  static IModelRepository movieRatingRepository = RepositoryFactory.GetMovieRatingRepository();
+        private Movie SetRatingAverage(Movie movie)
         {
-            movie.AverageRating = movieRatingRepository.GetAverageRating(movie.Id);
+            List<MovieRating> movieRatings = RepositoryFactory.GetMovieRatingRepository()
+                                                              .GetModels()
+                                                              .Cast<MovieRating>()
+                                                              .ToList();
+
+            var average = movieRatings.Where(p => p.MovieId == movie.Id)
+                                      .GroupBy(p => p.MovieId)
+                                      .Select(p => p.Average(q => q.Rating))
+                                      .SingleOrDefault();
+
+            movie.RatingAverage = Convert.ToDecimal(average);
 
             return movie;
         }
 
         private Movie SetRatingCount(Movie movie)
         {
-            movie.NumberOfRatings = movieRatingRepository.GetRatingCount(movie.Id);
+            List<MovieRating> movieRatings = RepositoryFactory.GetMovieRatingRepository()
+                                                  .GetModels()
+                                                  .Cast<MovieRating>()
+                                                  .ToList();
+
+            var count = movieRatings.Where(p => p.MovieId == movie.Id)
+                                    .Count();
+
+            movie.RatingCount = Convert.ToInt16(count);
 
             return movie;
         }
