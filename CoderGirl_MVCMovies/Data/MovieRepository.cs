@@ -58,5 +58,19 @@ namespace CoderGirl_MVCMovies.Data
 
             return movie;
         }
+
+        private Movie SetAverageRating(Movie movie)
+        {
+            movie.AverageRating = movieRatingRepository.GetAverageRating(movie.Id);
+
+            return movie;
+        }
+
+        private Movie SetRatingCount(Movie movie)
+        {
+            movie.NumberOfRatings = movieRatingRepository.GetRatingCount(movie.Id);
+
+            return movie;
+        }
     }
 }
