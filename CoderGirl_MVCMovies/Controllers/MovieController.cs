@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoderGirl_MVCMovies.Data;
 using CoderGirl_MVCMovies.Models;
+using CoderGirl_MVCMovies.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoderGirl_MVCMovies.Controllers
@@ -15,25 +16,20 @@ namespace CoderGirl_MVCMovies.Controllers
 
         public IActionResult Index()
         {
-            List<Movie> movies = movieRepository.GetModels()
-                                                .Cast<Movie>()
-                                                .ToList();
-
-            return View(movies);
+            List<MovieIndexViewModel> movieIndexViewModels = MovieIndexViewModel.GetMovieIndexViewModel();
+            return View(movieIndexViewModels);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Directors = directorRepository.GetModels()
-                                                  .Cast<Director>()
-                                                  .ToList();
+            MovieCreateViewModel movie = MovieCreateViewModel.GetMovieCreateViewModel();
 
-            return View();
+            return View(movie);
         }
 
         [HttpPost]
-        public IActionResult Create(Movie movie)
+        public IActionResult Create(MovieCreateViewModel movie)
         {
             if (String.IsNullOrWhiteSpace(movie.Name))
             {
@@ -46,23 +42,22 @@ namespace CoderGirl_MVCMovies.Controllers
 
             if(ModelState.ErrorCount > 0)
             {
-                ViewBag.Directors = directorRepository.GetModels()
+                movie.Directors = directorRepository.GetModels()
                                                       .Cast<Director>()
                                                       .ToList();
                 return View(movie);
             }
 
-            movieRepository.Save(movie);
+            //movieRepository.Save(movie);
+            movie.Persist();
             return RedirectToAction(actionName: nameof(Index));
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            IModel model = movieRepository.GetById(id);
+            MovieEditViewModel movie = MovieEditViewModel.GetMovieEditViewModel(id);
 
-            // cast the model which is an IModel to Movie
-            Movie movie = (Movie)model;
             return View(movie);
         }
 

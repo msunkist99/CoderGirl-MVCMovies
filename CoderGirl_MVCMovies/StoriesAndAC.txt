@@ -107,3 +107,11 @@ This means that these are good candidates for inheritance.
 - Your goal is to move as much common code as possible to the ModelRepository. 
 In fact, if done correctly, in the case of the DirectorRepository can be basically an empty class with no methods, fields or properites of its own.
 NOTE: This is nothing more than a refactor. That is, the tests from last week have not changed at all (though some new ones for validation will be added), and they should all still pass after your changes.
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+5/29/2019
+Update all three controllers to use ViewModels instead of passing model classes to the views
+- create ViewModel first for each view in each controller
+- update controllers to use ViewModels
+
